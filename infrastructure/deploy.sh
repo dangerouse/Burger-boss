@@ -35,7 +35,7 @@ DIST="$(mktemp -d)"
 trap 'rm -rf "$DIST"' EXIT
 
 cd "$REPO_ROOT"
-cp index.html style.css game.js levels.js test.html test.js "$DIST/"
+cp index.html style.css game.js levels.js leaderboard-link.js test.html test.js "$DIST/"
 
 echo "Deploying $(find "$DIST" -type f | wc -l | tr -d ' ') files to Pages project '$PROJECT'..."
 npx --yes wrangler pages deploy "$DIST" \

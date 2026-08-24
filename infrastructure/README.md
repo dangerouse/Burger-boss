@@ -51,7 +51,7 @@ every time. That file is gitignored.
 ./deploy.sh some-other-name # deploys to a different project
 ```
 
-The script stages the six game files into a temporary directory and uploads
+The script stages the game files into a temporary directory and uploads
 that, so nothing else in the repository reaches the public site.
 
 ## Automating this later
