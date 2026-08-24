@@ -1,0 +1,13 @@
+# Copy to terraform.tfvars and fill in. That file is gitignored, and both
+# Terraform and deploy.sh read from it, so this is the only place you need
+# to put your credentials.
+
+# API token with the "Cloudflare Pages: Edit" permission.
+# Create at: Cloudflare dashboard -> My Profile -> API Tokens -> Create Token
+cloudflare_api_token = "your_token_here"
+
+# Found in the dashboard sidebar, or in the URL after /accounts/.
+cloudflare_account_id = "your_account_id_here"
+
+# Optional. Decides the URL: <project_name>.pages.dev
+# project_name = "burger-boss"
