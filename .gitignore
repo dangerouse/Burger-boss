@@ -1,3 +1,16 @@
 .DS_Store
 .claude/
 node_modules/
+
+# Terraform
+infrastructure/.terraform/
+infrastructure/*.tfstate
+infrastructure/*.tfstate.*
+infrastructure/*.tfvars
+infrastructure/crash.log
+
+# Built by the deploy workflow
+dist/
+
+# wrangler local cache
+.wrangler/
