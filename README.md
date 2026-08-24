@@ -43,13 +43,38 @@ Tapping the canvas also jumps, so it works on a touchscreen.
 3. **Inferno Kitchen** — 10 hot dogs, long jumps, fast patrolling grills, and
    platforms that move under your feet.
 
+## Leaderboard
+
+Beat all three levels and the win screen shows a **Submit to the public
+leaderboard** button, carrying your run's time and death count to a
+[shared leaderboard](https://claude.ai/code/artifact/ea98dca6-43e5-4ae4-87fe-262a337fa8d2)
+that updates for everyone as soon as a new time lands — top 20, fastest first.
+
+A submitted time is checked against a floor computed from the game's own
+physics (a run can never legitimately finish faster than each level's width
+divided by the burger's top speed) and against the rule that a winning run has
+at most 2 deaths (a 3rd ends the run before it can be won). Times outside
+those bounds are rejected before anything is posted. This stops a typo or a
+joke entry, not a determined cheater editing the page's own JavaScript in
+devtools — there's no server here validating against real play, only the
+browser's own math, so treat the board as fun rather than an anti-cheat
+guarantee.
+
+The board only accepts submissions from people the artifact owner has given
+edit access to; a plain view-only link shows the board but the submit form is
+disabled. `leaderboard-link.js` is the only piece of game code involved — it
+just watches for the win screen and builds the link, and has no effect on the
+tested game engine.
+
 ## How it works
 
-Three files, no build step, no dependencies:
+No build step, no dependencies:
 
 - `index.html` — the page and the canvas.
 - `levels.js` — pure level data. Platforms, grills, hot dogs, spawn, exit.
 - `game.js` — input, physics, collision, and all the drawing.
+- `leaderboard-link.js` — additive only; shows the leaderboard link on the win
+  screen. The engine has no idea it exists.
 
 The physics run on a fixed 120 Hz timestep with a variable-rate render loop, so
 the feel is identical whether your display is 60 Hz or 144 Hz. Movement has

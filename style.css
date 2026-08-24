@@ -60,6 +60,25 @@ canvas {
   touch-action: none;
 }
 
+#lb-link {
+  display: block;
+  text-align: center;
+  padding: 12px 16px;
+  background: var(--ketchup);
+  color: #fff4e6;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: .02em;
+}
+
+#lb-link:hover {
+  filter: brightness(1.08);
+}
+
+#lb-link[hidden] {
+  display: none;
+}
+
 footer {
   display: flex;
   flex-wrap: wrap;
