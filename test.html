@@ -1,0 +1,22 @@
+<meta charset="utf-8">
+<title>Burger Boss - self test</title>
+<style>
+  body { background:#141014; color:#e8e0d4; font:14px ui-monospace, Menlo, monospace; padding:18px; }
+  h1 { font-size:18px; color:#f2c14e; }
+  .pass { color:#7ddc6a; } .fail { color:#ff6b5e; font-weight:bold; }
+  #summary { margin:14px 0; padding:10px; border-left:4px solid #f2c14e; }
+  canvas { display:none; }
+</style>
+<h1>Burger Boss &mdash; self test</h1>
+<div id="summary">running...</div>
+<pre id="out"></pre>
+<canvas id="game" width="960" height="540"></canvas>
+<script>
+  /* Freeze the animation loop before the game starts so the test can drive
+     frames one at a time with a fake clock. */
+  window.__cb = null;
+  window.requestAnimationFrame = cb => { window.__cb = cb; };
+</script>
+<script src="levels.js"></script>
+<script src="game.js"></script>
+<script src="test.js"></script>
