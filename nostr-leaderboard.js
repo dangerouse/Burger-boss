@@ -240,7 +240,7 @@
     renderBoard();
     renderPanel();
 
-    pool.subscribeMany(RELAYS, [{ kinds: [KIND], '#t': [TAG], limit: 500 }], {
+    pool.subscribeMany(RELAYS, { kinds: [KIND], '#t': [TAG], limit: 500 }, {
       onevent(evt) {
         if (considerEvent(evt)) renderBoard();
       }
