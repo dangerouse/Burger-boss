@@ -27,7 +27,11 @@ then visit <http://localhost:8000>.
 | `R` | Restart the current level |
 | `M` | Mute |
 
-Tapping the canvas also jumps, so it works on a touchscreen.
+Tapping the canvas also jumps, so it works on a touchscreen. On a touchscreen
+device, on-screen move/jump buttons appear over the canvas automatically
+(`mobile-controls.js` - it just dispatches the same keyboard events a keyboard
+would, so the game engine doesn't know the difference). The &#9974; button in
+the corner enters fullscreen on any device.
 
 ## The rules
 
@@ -89,6 +93,9 @@ No build step, no dependencies:
 - `game.js` — input, physics, collision, and all the drawing.
 - `leaderboard-link.js` — additive only; shows the leaderboard link on the win
   screen. The engine has no idea it exists.
+- `mobile-controls.js` — additive only; the fullscreen button and the
+  on-screen move/jump buttons, driving the engine with real `KeyboardEvent`s
+  the same way a keyboard does.
 - `leaderboard.html` / `leaderboard.css` / `nostr-leaderboard.js` — the
   leaderboard page: identity, validation, signing, and relay I/O.
 - `vendor/nostr-tools.bundle.js` — vendored, unmodified copy of

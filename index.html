@@ -12,6 +12,16 @@
   <div id="stage">
     <canvas id="game" width="960" height="540"></canvas>
     <a id="lb-link" href="#" target="_blank" rel="noopener" hidden>Submit to the public leaderboard &#8599;</a>
+
+    <button id="fullscreen-btn" type="button" aria-label="Toggle fullscreen" title="Toggle fullscreen">&#9974;</button>
+
+    <div id="touch-controls" aria-hidden="true">
+      <div id="tc-move">
+        <button type="button" class="tc-btn" data-code="ArrowLeft" aria-label="Move left">&larr;</button>
+        <button type="button" class="tc-btn" data-code="ArrowRight" aria-label="Move right">&rarr;</button>
+      </div>
+      <button type="button" class="tc-btn tc-jump" data-code="Space" aria-label="Jump">&uarr;</button>
+    </div>
   </div>
 
   <footer>
@@ -25,3 +35,4 @@
 <script src="levels.js"></script>
 <script src="game.js"></script>
 <script src="leaderboard-link.js"></script>
+<script src="mobile-controls.js"></script>
