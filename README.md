@@ -7,7 +7,7 @@ one meaner than the last.
 ![no build step, no dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
 
 ## Play
-
+Access via cloudflare: https://burger-boss.pages.dev
 Open `index.html` in any modern browser. That is the whole install.
 
 Or serve it locally if you prefer:
