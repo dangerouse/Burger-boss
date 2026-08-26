@@ -46,25 +46,39 @@ Tapping the canvas also jumps, so it works on a touchscreen.
 ## Leaderboard
 
 Beat all three levels and the win screen shows a **Submit to the public
-leaderboard** button, carrying your run's time and death count to a
-[shared leaderboard](https://claude.ai/code/artifact/ea98dca6-43e5-4ae4-87fe-262a337fa8d2)
-that updates for everyone as soon as a new time lands — top 20, fastest first.
+leaderboard** link, carrying your run's time and death count to
+[`leaderboard.html`](leaderboard.html) — top 20, fastest first, live for
+anyone who opens it.
+
+There's no backend. The board is a page on the
+[Nostr protocol](https://nostr.com): a signed, timestamped post to a handful
+of public relays (`relay.damus.io`, `nos.lol`, `relay.primal.net`), tagged
+`burgerboss-leaderboard-v1`. The page subscribes to that tag and renders
+whatever it finds, live, as new posts arrive — no server we run, no account
+for anyone to create. The first time you open the leaderboard it generates a
+keypair and keeps it in this browser's `localStorage`; that's the closest
+thing to an identity here, and it's what lets a better run replace your
+previous one on the board instead of stacking up duplicates.
 
 A submitted time is checked against a floor computed from the game's own
 physics (a run can never legitimately finish faster than each level's width
 divided by the burger's top speed) and against the rule that a winning run has
-at most 2 deaths (a 3rd ends the run before it can be won). Times outside
-those bounds are rejected before anything is posted. This stops a typo or a
-joke entry, not a determined cheater editing the page's own JavaScript in
-devtools — there's no server here validating against real play, only the
-browser's own math, so treat the board as fun rather than an anti-cheat
+at most 2 deaths (a 3rd ends the run before it can be won). That check runs
+twice — once before your own run is posted, and again on every post the page
+reads back from a relay, so a bad entry can't reach the board no matter how it
+got onto a relay. It stops a typo or a joke entry, not a determined person
+signing a fake event by hand: Nostr is fully permissionless, so anyone can
+post directly to a relay without going through this page at all. There's no
+server here validating against real play, only public math anyone can also
+run for themselves — treat the board as fun rather than an anti-cheat
 guarantee.
 
-The board only accepts submissions from people the artifact owner has given
-edit access to; a plain view-only link shows the board but the submit form is
-disabled. `leaderboard-link.js` is the only piece of game code involved — it
-just watches for the win screen and builds the link, and has no effect on the
-tested game engine.
+`leaderboard.html`, `leaderboard.css`, and `nostr-leaderboard.js` are the
+whole leaderboard; `vendor/nostr-tools.bundle.js` is the (unmodified,
+[Unlicense](https://github.com/nbd-wtf/nostr-tools)-licensed) library that
+handles the actual signing and relay connections. None of it touches the game
+engine — `leaderboard-link.js` just watches for the win screen and builds the
+link over in `index.html`.
 
 ## How it works
 
@@ -75,6 +89,10 @@ No build step, no dependencies:
 - `game.js` — input, physics, collision, and all the drawing.
 - `leaderboard-link.js` — additive only; shows the leaderboard link on the win
   screen. The engine has no idea it exists.
+- `leaderboard.html` / `leaderboard.css` / `nostr-leaderboard.js` — the
+  leaderboard page: identity, validation, signing, and relay I/O.
+- `vendor/nostr-tools.bundle.js` — vendored, unmodified copy of
+  [nostr-tools](https://github.com/nbd-wtf/nostr-tools) v2.25.0.
 
 The physics run on a fixed 120 Hz timestep with a variable-rate render loop, so
 the feel is identical whether your display is 60 Hz or 144 Hz. Movement has
@@ -121,6 +139,12 @@ all the gaps jumpable, does every hot dog sit on a surface, do patrolling
 grills stay on their ledge), physics (jump height, jump distance, friction),
 hazards, collection, the locked exit, level progression, moving platforms,
 timed grills, and lives. It is deterministic and needs no tooling.
+
+Open `test-leaderboard.html` for the leaderboard's own suite — signs and
+verifies real events with the vendored nostr-tools library, and checks the
+physics floor, name sanitization, per-identity best-time replacement, and
+top-20 sorting. It makes no relay connections, so it's safe to run offline or
+repeatedly.
 
 ## License
 

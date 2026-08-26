@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Burger Boss Leaderboard - self test</title>
+<style>
+  body { background:#141014; color:#e8e0d4; font:14px ui-monospace, Menlo, monospace; padding:18px; }
+  h1 { font-size:18px; color:#f2c14e; }
+  .pass { color:#7ddc6a; } .fail { color:#ff6b5e; font-weight:bold; }
+  #summary { margin:14px 0; padding:10px; border-left:4px solid #f2c14e; }
+</style>
+<h1>Burger Boss Leaderboard &mdash; self test</h1>
+<p>Exercises signing, verification, validation and aggregation against the real
+nostr-tools library. Makes no network calls - nothing here touches a relay.</p>
+<div id="summary">running...</div>
+<pre id="out"></pre>
+<div id="root" style="display:none"></div>
+<script>window.BB_LEADERBOARD_NO_AUTOINIT = true;</script>
+<script src="vendor/nostr-tools.bundle.js"></script>
+<script src="nostr-leaderboard.js"></script>
+<script src="test-leaderboard.js"></script>
