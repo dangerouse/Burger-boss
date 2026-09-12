@@ -4,7 +4,7 @@
 (() => {
   'use strict';
 
-  const LEADERBOARD_URL = 'https://claude.ai/code/artifact/ea98dca6-43e5-4ae4-87fe-262a337fa8d2';
+  const LEADERBOARD_URL = 'leaderboard.html';
 
   const link = document.getElementById('lb-link');
   if (!link) return;
